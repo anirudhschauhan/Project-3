@@ -53,28 +53,29 @@
      </rowConstraints>
       <children>
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
-         <TextField prefHeight="26.0" prefWidth="30.0" promptText="Enter First Name" GridPane.columnIndex="1" />
+         <TextField fx:id="fname" prefHeight="26.0" prefWidth="30.0" promptText="Enter First Name" GridPane.columnIndex="1" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth" GridPane.rowIndex="2" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location" GridPane.rowIndex="3" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="65.98307228088379" GridPane.rowIndex="1" />
-         <TextField promptText="Enter Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         <DatePicker prefHeight="26.0" prefWidth="227.0" promptText="Enter" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         <TextField promptText="Enter Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         <TextField fx:id="lname" promptText="Enter Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <DatePicker fx:id="DOB" prefHeight="26.0" prefWidth="227.0" promptText="Enter" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <TextField fx:id="location" promptText="Enter Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Membership Type" GridPane.rowIndex="4" />
          <HBox prefHeight="100.0" prefWidth="200.0" translateY="8.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <children>
-               <RadioButton fx:id="memberType" mnemonicParsing="false" selected="true" text="Standard" />
-               <RadioButton fx:id="memberType" mnemonicParsing="false" text="Family" translateX="30.0" />
-               <RadioButton fx:id="memberType" mnemonicParsing="false" text="Premium" translateX="60.0" />
+               <RadioButton fx:id="StdMem" mnemonicParsing="false" selected="true" text="Standard" />
+               <RadioButton fx:id="FamMem" mnemonicParsing="false" text="Family" translateX="30.0" />
+               <RadioButton fx:id="PreMem" mnemonicParsing="false" text="Premium" translateX="60.0" />
             </children>
          </HBox>
       </children>
    </GridPane>
    <HBox alignment="CENTER" prefHeight="38.0" prefWidth="414.0">
       <children>
-          <Button onAction="#onHelloButtonClick" prefHeight="31.0" prefWidth="82.0" text="Add" />
+          <Button fx:id="added" onAction="#onHelloButtonClick" prefHeight="31.0" prefWidth="82.0" text="Add" />
          <Pane prefHeight="60.0" prefWidth="105.0" />
-         <Button onAction="#onHelloButtonClick" prefHeight="31.0" prefWidth="82.0" text="Remove" />
+         <Button fx:id="removed" onAction="#onHelloButtonClick" prefHeight="31.0" prefWidth="82.0" text="Remove" />
       </children>
    </HBox>
+   <Button fx:id="quit" mnemonicParsing="false" text="Quit" translateX="205.0" translateY="150.0" />
 </VBox>
