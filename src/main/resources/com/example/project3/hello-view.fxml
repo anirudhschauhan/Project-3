@@ -3,9 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
@@ -14,29 +20,61 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <GridPane prefWidth="442.0">
+   <MenuBar>
+     <menus>
+       <Menu mnemonicParsing="false" text="Membership">
+         <items>
+           <MenuItem mnemonicParsing="false" text="Close" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Fitness Class">
+         <items>
+           <MenuItem mnemonicParsing="false" text="Delete" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Information Hub">
+         <items>
+           <MenuItem mnemonicParsing="false" text="About" />
+         </items>
+       </Menu>
+     </menus>
+   </MenuBar>
+   <GridPane prefWidth="447.0">
      <columnConstraints>
-       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="115.0" />
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="332.0" />
      </columnConstraints>
      <rowConstraints>
        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
          <TextField prefHeight="26.0" prefWidth="30.0" promptText="Enter First Name" GridPane.columnIndex="1" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth" GridPane.rowIndex="2" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location" GridPane.rowIndex="3" />
-          <Button onAction="#onHelloButtonClick" text="Add" GridPane.rowIndex="4" />
-         <Button mnemonicParsing="false" text="Remove" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="65.98307228088379" GridPane.rowIndex="1" />
          <TextField promptText="Enter Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          <DatePicker prefHeight="26.0" prefWidth="227.0" promptText="Enter" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          <TextField promptText="Enter Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Membership Type" GridPane.rowIndex="4" />
+         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <children>
+               <RadioButton fx:id="memberType" mnemonicParsing="false" selected="true" text="Standard" />
+               <RadioButton fx:id="memberType" mnemonicParsing="false" text="Family" />
+               <RadioButton fx:id="memberType" mnemonicParsing="false" text="Premium" />
+            </children>
+         </HBox>
       </children>
    </GridPane>
+   <HBox alignment="CENTER" prefHeight="38.0" prefWidth="414.0">
+      <children>
+          <Button onAction="#onHelloButtonClick" prefHeight="31.0" prefWidth="82.0" text="Add" />
+         <Pane prefHeight="60.0" prefWidth="105.0" />
+         <Button onAction="#onHelloButtonClick" prefHeight="31.0" prefWidth="82.0" text="Remove" />
+      </children>
+   </HBox>
 </VBox>
