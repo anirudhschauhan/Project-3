@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="485.0" prefWidth="487.0" spacing="20.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="com.example.project3.GymManagerController">
+<VBox prefHeight="485.0" prefWidth="487.0" spacing="20.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project3.GymManagerController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -61,11 +61,11 @@
          <DatePicker prefHeight="26.0" prefWidth="227.0" promptText="Enter" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          <TextField promptText="Enter Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Membership Type" GridPane.rowIndex="4" />
-         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <HBox prefHeight="100.0" prefWidth="200.0" translateY="8.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <children>
                <RadioButton fx:id="memberType" mnemonicParsing="false" selected="true" text="Standard" />
-               <RadioButton fx:id="memberType" mnemonicParsing="false" text="Family" />
-               <RadioButton fx:id="memberType" mnemonicParsing="false" text="Premium" />
+               <RadioButton fx:id="memberType" mnemonicParsing="false" text="Family" translateX="30.0" />
+               <RadioButton fx:id="memberType" mnemonicParsing="false" text="Premium" translateX="60.0" />
             </children>
          </HBox>
       </children>
