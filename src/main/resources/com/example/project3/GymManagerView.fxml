@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -49,9 +50,12 @@
                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Membership Type" GridPane.rowIndex="4" />
                            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                               <children>
-                                 <RadioButton fx:id="standardMem" mnemonicParsing="false" selected="true" text="Standard" />
-                                 <RadioButton fx:id="familyMem" mnemonicParsing="false" text="Family" />
-                                 <RadioButton fx:id="premiumMem" mnemonicParsing="false" text="Premium" />
+                                 <RadioButton fx:id="standardMem" mnemonicParsing="false" selected="true" text="Standard">
+                                    <toggleGroup>
+                                       <ToggleGroup fx:id="memberType" />
+                                    </toggleGroup></RadioButton>
+                                 <RadioButton fx:id="familyMem" mnemonicParsing="false" text="Family" toggleGroup="$memberType" />
+                                 <RadioButton fx:id="premiumMem" mnemonicParsing="false" text="Premium" toggleGroup="$memberType" />
                               </children>
                            </HBox>
                            <TextField fx:id="gymLocation" promptText="Enter Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -68,9 +72,37 @@
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
          </content>
        </Tab>
+         <Tab text="Loading Members">
+           <content>
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <Text layoutX="14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose a file to upload:" />
+                     <Text layoutX="41.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     <HBox layoutX="188.0" layoutY="33.0" prefHeight="27.0" prefWidth="254.0">
+                        <children>
+                           <RadioButton fx:id="scheduletxt" mnemonicParsing="false" text="classSchedule.txt">
+                              <toggleGroup>
+                                 <ToggleGroup fx:id="fileNombre" />
+                              </toggleGroup>
+                           </RadioButton>
+                           <RadioButton fx:id="membertxt" mnemonicParsing="false" prefHeight="18.0" prefWidth="132.0" text="memberList.txt" toggleGroup="$fileNombre" />
+                        </children>
+                     </HBox>
+                     <Button layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#addFile" prefHeight="26.0" prefWidth="75.0" text="Add File" />
+                  </children>
+               </AnchorPane>
+           </content>
+         </Tab>
          <Tab text="Information">
            <content>
-             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <Button layoutX="30.0" layoutY="27.0" mnemonicParsing="false" onAction="#printMem" text="Print Members" />
+                     <Button layoutX="30.0" layoutY="68.0" mnemonicParsing="false" onAction="#printCounty" text="Print By County" />
+                     <Button layoutX="30.0" layoutY="111.0" mnemonicParsing="false" onAction="#printName" text="Print By Name" />
+                     <Button layoutX="30.0" layoutY="153.0" mnemonicParsing="false" onAction="#printExp" text="Print By Expiration Date" />
+                     <Button layoutX="30.0" layoutY="195.0" mnemonicParsing="false" onAction="#printFees" text="Print Mem Fees" />
+                  </children></AnchorPane>
            </content>
          </Tab>
      </tabs>

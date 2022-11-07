@@ -19,6 +19,7 @@ public class GymManagerController {
 
     @FXML
     private Label welcomeText;
+
     @FXML
     private TextField fname;
     @FXML
@@ -31,6 +32,8 @@ public class GymManagerController {
     private Label StdMem;
     @FXML
     private RadioButton standardMem, familyMem, premiumMem;
+    @FXML
+    private RadioButton scheduletxt, membertxt;
     @FXML
     private Label FamMem;
     @FXML
@@ -124,7 +127,8 @@ public class GymManagerController {
         if (validation(fam, locate)) {
             if (!memData.add(fam)) {
                 outputTextArea.appendText(fam.getFname() + " " + fam.getLname() + " is already in the database.\n");
-            } else {
+            }
+            else {
                 outputTextArea.appendText(fam.getFname() + " " + fam.getLname() + " added.\n");
             }
         }
@@ -149,7 +153,8 @@ public class GymManagerController {
         if (validation(pre, locate)) {
             if (!memData.add(pre)) {
                 outputTextArea.appendText(pre.getFname() + " " + pre.getLname() + " is already in the database.\n");
-            } else {
+            }
+            else {
                 outputTextArea.appendText(pre.getFname() + " " + pre.getLname() + " added.\n");
             }
         }
@@ -195,6 +200,150 @@ public class GymManagerController {
         }
 
         return true;
+    }
+    @FXML
+    protected void printMem() {
+        if (memData.getSize() == 0) {
+            outputTextArea.appendText("Member database is empty!\n");
+            return;
+        }
+        outputTextArea.appendText("-list of members-\n");
+        outputTextArea.appendText(memData.print());
+        outputTextArea.appendText("-end of list-\n");
+    }
+    @FXML
+    protected void printCounty(){
+        outputTextArea.appendText(memData.printByCounty());
+    }
+    @FXML
+    protected void printName(){
+        outputTextArea.appendText(memData.printByName());
+    }
+    @FXML
+    protected void printExp(){
+        outputTextArea.appendText(memData.printByExpirationDate());
+    }
+    @FXML
+    protected void printFees(){
+        outputTextArea.appendText(memData.printMemFees());
+    }
+    @FXML
+    protected void addFile(){
+        if(scheduletxt.isSelected()){
+            try {
+                File file = new File("classSchedule.txt");
+                Scanner scanner = new Scanner(file);
+                String line = "";
+                outputTextArea.appendText("-Fitness classes loaded-\n");
+                while(scanner.hasNextLine()) {
+                    line = scanner.nextLine();
+                    String[] words = line.split(" ");
+                    int count = 0;
+                    FitnessClass fitness = new FitnessClass();
+                    String className = words[count++];
+                    Classes fclass = findClass(className);
+                    fitness.setClass(fclass);
+                    String instructorName = words[count++];
+                    Instructor instructor = findInstructor(instructorName);
+                    fitness.setInstructor(instructor);
+                    String timeStr = words[count++];
+                    Time time = findTime(timeStr);
+                    fitness.setTime(time);
+                    String locationName = words[count];
+                    Location location = findLocation(locationName);
+                    fitness.setLocation(location);
+                    schedule.addClass(fitness);
+                   outputTextArea.appendText(fitness.toString()+"\n");
+                }
+                outputTextArea.appendText("-end of class list-\n");
+                scanner.close();
+            }
+            catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(membertxt.isSelected()){
+            try {
+                File file = new File("memberList.txt");
+                Scanner sc = new Scanner(file);
+                String line = "";
+
+                outputTextArea.appendText("-list of members loaded-\n");
+
+                while(sc.hasNextLine()) {
+                    line = sc.nextLine();
+                    String[] stuff = line.split("\\s+");
+                    addFileMem(stuff);
+                }
+
+                sc.close();
+                outputTextArea.appendText("-end of list-\n");
+            }
+            catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void addFileMem(String[] info) {
+        Member mem = new Member();
+        int c = 0;
+        mem.setFname(info[c++]);
+        mem.setLname(info[c++]);
+        Date dob = new Date(info[c++]);
+        mem.setDOB(dob);
+        Date expire = new Date(info[c++]);
+        mem.setExpire(expire);
+        String location = info[c];
+        for (Location locate : Location.values()) {
+            if (location.toUpperCase().equals(locate.name())) {
+                mem.setLocation(locate);
+            }
+        }
+        if (validation(mem, location)) {
+            if (!memData.add(mem)) {
+                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " is already in the database.\n");
+            } else {
+                outputTextArea.appendText(mem.toString()+"\n");
+            }
+        }
+    }
+    private Classes findClass(String className) {
+        Classes fitness = null;
+        for(Classes classes : Classes.values()) {
+            if(className.toUpperCase().equals(classes.name())) {
+                fitness = classes;
+            }
+        }
+        return fitness;
+    }
+    private Instructor findInstructor(String instructorName) {
+        Instructor instructor = null;
+        for(Instructor i : Instructor.values()) {
+            if(instructorName.toUpperCase().equals(i.name())) {
+                instructor = i;
+            }
+        }
+        return instructor;
+    }
+
+    private Location findLocation(String locationName) {
+        Location location = null;
+        for(Location l : Location.values()) {
+            if(locationName.toUpperCase().equals(l.name())) {
+                location = l;
+            }
+        }
+        return location;
+    }
+
+    private Time findTime(String timeStr) {
+        Time time = null;
+        for(Time t : Time.values()) {
+            if(timeStr.toUpperCase().equals(t.name())) {
+                time = t;
+            }
+        }
+        return time;
     }
 
 }

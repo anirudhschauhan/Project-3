@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 public class MemberDatabase {
     private Member[] mlist;
     private int size;
+
     private final int INTIAL_CAPACITY = 4;
     private final int NOT_FOUND = -1;
     private static final DecimalFormat df = new DecimalFormat("0.00");
@@ -105,92 +106,103 @@ public class MemberDatabase {
     /**
      * prints out array as is
      */
-    public void print() {
+    public String print() {
         if (size == 0) {
-            System.out.print("Member Database is empty!");
-            return;
+            return ("Member Database is empty!");
+
         }
+        String str = "";
         for (int i = 0; i < size; i++) {
             if (mlist[i] != null) {
-                System.out.println(mlist[i].toString());
+                str += mlist[i].toString()+"\n";
             }
         }
-}
+        return(str);
+    }
 
     /**
      * prints out database by County
      */
-    public void printByCounty() {
+    public String printByCounty() {
         if (size == 0) {
-            System.out.print("Member Database is empty!");
-            return;
+            return("Member Database is empty!");
+
         }
+
         quickSortLocation(0, size - 1);
-        System.out.println("-list of members sorted by county and zipcode-");
+        String str = "";
+        str+= "-list of members sorted by county and zipcode-\n";
         for (int i = 0; i < size; i++) {
             if (mlist[i] != null) {
-                System.out.println(mlist[i].toString());
+                str+=mlist[i].toString()+"\n";
             }
         }
-        System.out.println("-end of list-");
+        str+= "-end of list-\n";
+        return str;
 
     } //sort by county and then zipcode
 
     /**
      * prints out database by expiration data
      */
-    public void printByExpirationDate() {
+    public String printByExpirationDate() {
         if (size == 0) {
-            System.out.print("Member Database is empty!");
-            return;
+            return("Member Database is empty!\n");
+
         }
         quickSortExpire(0, size - 1);
-        System.out.println("-list of members sorted by membership expiration date-");
+        String str="";
+        str+="-list of members sorted by membership expiration date-\n";
         for (int i = 0; i < size; i++) {
             if (mlist[i] != null) {
-                System.out.println(mlist[i].toString());
+                str+=mlist[i].toString()+"\n";
             }
         }
-        System.out.println("-end of list-");
+        str+="-end of list-\n";
+        return str;
     }
 
     /**
      * prints out database by member name
      * sort by last name and then first name
      */
-    public void printByName() {
+    public String printByName() {
         if (size == 0) {
-            System.out.print("Member Database is empty!");
-            return;
+            return("Member Database is empty!\n");
+
         }
         quickSortName(0, size - 1);
-        System.out.println("-list of members sorted by last name, and first name-");
+        String str="";
+        str+="-list of members sorted by last name, and first name-\n";
         for (int i = 0; i < size; i++) {
             if (mlist[i] != null) {
-                System.out.println(mlist[i].toString());
+                str+=mlist[i].toString()+"\n";
             }
         }
-        System.out.println("-end of list-");
-
+        str+="-end of list-\n";
+            return str;
     }
 
     /**
      * prints all membership fees
      */
-    public void printMemFees(){
+    public String printMemFees(){
         if (size == 0) {
-            System.out.print("Member Database is empty!");
-            return;
+            return("Member Database is empty!\n");
+
         }
-        System.out.println("-list of members with membership fees-");
+        String str="";
+        str+="-list of members with membership fees-\n";
         for (int i = 0; i < size; i++) {
             if (mlist[i] != null) {
-                System.out.print(mlist[i].toString());
+                str+=mlist[i].toString()+"\n";
             }
 
-            System.out.println(", Membership fee: $" + df.format(mlist[i].membershipFee()));
+            str+= ", Membership fee: $" + df.format(mlist[i].membershipFee())+"\n";
 
         }
+        str+="-end of list-\n";
+        return str;
     }
 
     /**
