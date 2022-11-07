@@ -17,41 +17,37 @@ public class GymManagerController {
         schedule = new Schedule();
     }
 
-    @FXML
-    private Label welcomeText;
 
     @FXML
     private TextField fname;
     @FXML
+    private TextField classFname;
+    @FXML
     private TextField lname;
+    @FXML
+    private TextField classLname;
     @FXML
     private DatePicker DOB;
     @FXML
+    private DatePicker classDOB;
+    @FXML
     private TextField gymLocation;
     @FXML
-    private Label StdMem;
+    private TextField classLocation;
+    @FXML
+    private TextField classInstructor;
+    @FXML
+    private RadioButton pilat, spinn, card;
     @FXML
     private RadioButton standardMem, familyMem, premiumMem;
     @FXML
     private RadioButton scheduletxt, membertxt;
     @FXML
-    private Label FamMem;
-    @FXML
-    private Label PreMem;
-    @FXML
-    private Label added;
-    @FXML
-    private Label removed;
-    @FXML
-    private Button quit;
+    private RadioButton guestCheck;
     @FXML
     private TextArea outputTextArea;
 
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
     public void addMember(){
         if(fname.getText().equals("") || lname.getText().equals("")){
             outputTextArea.appendText("Please enter your name.\n");
@@ -344,6 +340,296 @@ public class GymManagerController {
             }
         }
         return time;
+    }
+    @FXML
+    private void checkInPerson(){
+        if(guestCheck.isSelected()){
+            checkInGuest();
+        }
+        else{
+            checkInMem();
+        }
+
+    }
+    @FXML
+    private void dropPerson(){
+        if(guestCheck.isSelected()){
+            dropClassGuest();
+        }
+        else{
+            dropClass();
+        }
+
+    }
+    private void checkInMem() {
+        FitnessClass fitness = new FitnessClass();
+        Member mem = new Member();
+        String className="";
+
+        if(pilat.isSelected()){
+            className = "PILATES";
+        }
+        if(spinn.isSelected()){
+            className = "SPINNING";
+        }
+        if(card.isSelected()){
+            className = "CARDIO";
+        }
+        Classes fclass = findClass(className);
+        fitness.setClass(fclass);
+        String instructorName = classInstructor.getText();
+        Instructor instructor = findInstructor(instructorName);
+        fitness.setInstructor(instructor);
+        String locationName = String.valueOf(classLocation.getText());
+        Location location = findLocation(locationName);
+
+        fitness.setLocation(location);
+        mem.setFname(classFname.getText());
+        mem.setLname(classLname.getText());
+
+        Date dob = new Date(classDOB.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        mem.setDOB(dob);
+
+        if(validCheckIn(mem, className, instructorName, locationName, fitness)) {
+
+            if (!schedule.getFitnessClass(fitness).checkIn(memData.getMember(mem))) {
+               outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " already checked in.\n");
+            }
+            else {
+                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " checked in " + schedule.getFitnessClass(fitness).toString()+"\n");
+            }
+        }
+    }
+    private void checkInGuest() {
+        FitnessClass fitness = new FitnessClass();
+        Member mem = new Member();
+        String className="";
+
+        if(pilat.isSelected()){
+            className = "PILATES";
+        }
+        if(spinn.isSelected()){
+            className = "SPINNING";
+        }
+        if(card.isSelected()){
+            className = "CARDIO";
+        }
+        Classes fclass = findClass(className);
+        fitness.setClass(fclass);
+        String instructorName = classInstructor.getText();
+        Instructor instructor = findInstructor(instructorName);
+        fitness.setInstructor(instructor);
+        String locationName = String.valueOf(classLocation.getText());
+        Location location = findLocation(locationName);
+
+        fitness.setLocation(location);
+        mem.setFname(classFname.getText());
+        mem.setLname(classLname.getText());
+        Date dob = new Date(classDOB.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        mem.setDOB(dob);
+        if(validGuestCheckIn(mem, className, instructorName, locationName, fitness)) {
+            if (!schedule.getFitnessClass(fitness).checkInGuest((Family) memData.getMember(mem))) {
+                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " ran out of guest passes.\n");
+            }
+            else {
+                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " (guest) checked in " +
+                        schedule.getFitnessClass(fitness).toString()+"\n");
+            }
+        }
+    }
+    private void dropClass() {
+        FitnessClass fitness = new FitnessClass();
+        Member mem = new Member();
+        String className="";
+
+
+        if(pilat.isSelected()){
+            className = "PILATES";
+        }
+        if(spinn.isSelected()){
+            className = "SPINNING";
+        }
+        if(card.isSelected()){
+            className = "CARDIO";
+        }
+        Classes fclass = findClass(className);
+        fitness.setClass(fclass);
+        String instructorName = classInstructor.getText();
+        Instructor instructor = findInstructor(instructorName);
+        fitness.setInstructor(instructor);
+        String locationName = String.valueOf(classLocation.getText());
+        Location location = findLocation(locationName);
+
+        fitness.setLocation(location);
+        mem.setFname(classFname.getText());
+        mem.setLname(classLname.getText());
+        Date dob = new Date(classDOB.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        mem.setDOB(dob);
+        if(validConditions(mem, className, instructorName, locationName, fitness)) {
+            if(!schedule.getFitnessClass(fitness).drop(mem)) {
+                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " did not check in.\n");
+            }
+            else {
+                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " done with the class.\n");
+            }
+        }
+    }
+    private void dropClassGuest() {
+        FitnessClass fitness = new FitnessClass();
+        Member mem = new Member();
+        String className="";
+
+
+        if(pilat.isSelected()){
+            className = "PILATES";
+        }
+        if(spinn.isSelected()){
+            className = "SPINNING";
+        }
+        if(card.isSelected()){
+            className = "CARDIO";
+        }
+        Classes fclass = findClass(className);
+        fitness.setClass(fclass);
+        String instructorName = classInstructor.getText();
+        Instructor instructor = findInstructor(instructorName);
+        fitness.setInstructor(instructor);
+        String locationName = String.valueOf(classLocation.getText());
+        Location location = findLocation(locationName);
+
+        fitness.setLocation(location);
+        mem.setFname(classFname.getText());
+        mem.setLname(classLname.getText());
+        Date dob = new Date(classDOB.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        mem.setDOB(dob);
+        if(validConditions(mem, className, instructorName, locationName, fitness)) {
+            if (!schedule.getFitnessClass(fitness).dropGuest((Family) memData.getMember(mem))) {
+                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " has no guests checked in\n");
+            }
+            else {
+                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " Guest done with the class.\n");
+            }
+        }
+
+    }
+    private boolean validGuestCheckIn(Member mem, String className, String instructorName,
+                                      String locationName, FitnessClass fitness) {
+        Date today = new Date();
+        if(!(memData.getMember(mem) instanceof Family)) {
+            outputTextArea.appendText("Standard membership - guest check-in is not allowed.\n");
+            return false;
+        }
+        if(!validConditions(mem, className, instructorName, locationName, fitness)) {
+            return false;
+        }
+        if(memData.getMember(mem).getExpire().compareTo(today) < 0) {
+            outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " " + mem.getDOB() + " membership expired.\n");
+            return false;
+        }
+        if(!memData.getMember(mem).getLocation().equals(fitness.getLocation())) {
+            outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " Guest checking in " +
+                    fitness.getLocation().toString() + " - guest location restriction.\n");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validCheckIn(Member mem, String className, String instructorName,
+                                 String locationName, FitnessClass fitness) {
+        Date today = new Date();
+
+        if(validConditions(mem, className, instructorName, locationName, fitness)) {
+
+            if (!(memData.getMember(mem) instanceof Family)) {
+                if(!memData.getMember(mem).getLocation().equals(fitness.getLocation())) {
+                    outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " checking in " +
+                            fitness.getLocation().toString() + " - standard membership location restriction.\n");
+                    return false;
+                }
+            }
+            if(memData.getMember(mem).getExpire().compareTo(today) < 0) {
+                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " " + mem.getDOB() + " membership expired.\n");
+                return false;
+            }
+            FitnessClass classConflict= checkTimeConflict(mem, schedule.getFitnessClass(fitness));
+            if(classConflict != null) {
+                outputTextArea.appendText("Time conflict - " + classConflict.getFitClass().name() + " - " +
+                        classConflict.getInstructor().name() + ", " + classConflict.getTime().toString() + ", " +
+                        classConflict.getLocation().toString()+"\n");
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+    private boolean validConditions(Member mem, String className, String instructorName,
+                                    String locationName, FitnessClass fitness) {
+
+        if(!mem.getDOB().isValid()) {
+            outputTextArea.appendText("DOB " + mem.getDOB() + ": invalid calendar date!\n ");
+            return false;
+
+        }
+        if(memData.getMember(mem) == null) {
+            outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " " + mem.getDOB() + " is not in the database.\n");
+
+            return false;
+        }
+        if(fitness.getFitClass() == null) {
+            outputTextArea.appendText(className + " - class does not exist.\n");
+
+            return false;
+        }
+        if(fitness.getInstructor() == null) {
+            outputTextArea.appendText(instructorName + " - instructor does not exist.\n");
+
+            return false;
+        }
+        if(fitness.getLocation() == null) {
+            outputTextArea.appendText(locationName + " - invalid location.\n");
+
+            return false;
+        }
+        if(schedule.getFitnessClass(fitness) == null) {
+            Location falseLocation = locationCheck(fitness);
+
+            if(falseLocation != null) {
+
+                outputTextArea.appendText(fitness.getFitClass().getClassName() + " by " +
+                        fitness.getInstructor().toString() + " does not exist at " + falseLocation.name()+"\n");
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+    private Location locationCheck(FitnessClass fclass) {
+        for(int i = 0; i < schedule.getNumClasses(); i++) {
+            FitnessClass fitness = schedule.getFitnessClass(i);
+            for(int j = 0; j < fitness.getLength(); j++) {
+                if(fclass.getFitClass().equals(fitness.getFitClass()) &&
+                        fclass.getInstructor().equals(fitness.getInstructor()) &&
+                        !fclass.getLocation().equals(fitness.getLocation())) {
+                    return fclass.getLocation();
+                }
+            }
+        }
+        return null;
+    }
+    private FitnessClass checkTimeConflict(Member m, FitnessClass fclass) {
+        Time time = fclass.getTime();
+        for(int i = 0; i < schedule.getNumClasses(); i++) {
+            FitnessClass fitness = schedule.getFitnessClass(i);
+            for(int j = 0; j < fitness.getLength(); j++) {
+                if(!fclass.equals(fitness) && time.equals(fitness.getTime()) &&
+                        fitness.memberCheck(m)) {
+                    return fitness;
+                }
+            }
+        }
+
+        return null;
     }
 
 }
