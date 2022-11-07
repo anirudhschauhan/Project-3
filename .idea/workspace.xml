@@ -5,7 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="257dea54-4b49-461c-92f0-374b20fa0fed" name="Changes" comment="changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/Classes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/Date.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/Family.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/FitnessClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/Instructor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/Location.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/Member.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/MemberDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/Premium.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/Schedule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/Time.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/project3/GymManagerView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project3/GymManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/GymManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project3/GymManagerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project3/GymManagerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/project3/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +54,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/anirudhchauhan/Desktop/Sothware Methodology/Project-3&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
@@ -76,6 +92,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="com.example.etjam2.GymManagerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.etjam2.GymManagerMain" />
+      <module name="Project-3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.etjam2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="com.example.project3.GymManagerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.project3.GymManagerMain" />
       <module name="Project-3" />
@@ -92,6 +121,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.com.example.project3.GymManagerMain" />
+        <item itemvalue="Application.com.example.etjam2.GymManagerMain" />
         <item itemvalue="Application.GymManagerMain" />
         <item itemvalue="Application.RunProject2" />
       </list>
