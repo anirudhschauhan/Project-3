@@ -77,27 +77,5 @@ public class Schedule {
      * empty or not
      * @return true or false
      */
-        public boolean isEmpty() {
-            if(numClass == 0) {
-                return true;
-            }
-            return false;
-        }
 
-
-    /**
-     * prints schedule as is
-     */
-        public void printSchedule() {
-            if(isEmpty()) {
-                System.out.println("Fitness class schedule is empty.");
-            }
-            else {
-                System.out.println("-Fitness classes-");
-                for (int i = 0; i < numClass; i++) {
-                    System.out.println(fitClass[i].toString());
-                }
-                System.out.println("-end of class list-");
-            }
-        }
 }

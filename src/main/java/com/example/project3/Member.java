@@ -295,21 +295,4 @@ public class Member implements Comparable<Member> {
         return true;
     }
 
-    /**
-     * test bed for compareTo() method
-     * @param args - input
-     */
-    public static void main(String[] args){
-        //Testing the compareTo() method
-        System.out.println("Test case 1");
-        Member member = new Member("John", "Doe", new Date("1/20/1990"), new Date("1/17/2023"), Location.BRIDGEWATER);
-        Member testmember = new Member("John", "Doe", new Date("1/20/1990"), new Date("1/17/2023"), Location.BRIDGEWATER);
-        if(member.compareTo(testmember) == 0){
-            System.out.println("Member exists");
-        if(member.compareTo(testmember) != 0){
-            System.out.println("Member does not exist");
-            }
-        }
-    }
-
 }
