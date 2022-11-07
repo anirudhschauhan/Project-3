@@ -94,8 +94,8 @@
                            <TextField fx:id="fnameFitness" promptText="Enter First Name" GridPane.columnIndex="1" />
                            <TextField fx:id="lnameFitness" promptText="Enter Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            <DatePicker fx:id="DOBFitness" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                           <RadioButton fx:id="fitnessGuest" mnemonicParsing="false" text="Guest" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                           <TextField fx:id="fitnessClass" promptText="Enter Fitness Class Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                           <RadioButton fx:id="guestFitness" mnemonicParsing="false" text="Guest" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                           <TextField fx:id="classFitness" promptText="Enter Fitness Class Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            <Button fx:id="addFitness" mnemonicParsing="false" onAction="#checkInMem" prefHeight="63.0" prefWidth="82.0" text="Add" GridPane.rowIndex="5" />
                            <Button fx:id="removeFitness" mnemonicParsing="false" onAction="#dropClass" prefHeight="80.0" prefWidth="82.0" text="Remove" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         </children>
