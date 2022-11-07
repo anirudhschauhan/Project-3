@@ -71,14 +71,17 @@ public class MemberDatabase {
         if (size == mlist.length) {
             grow();
         }
-        //if (find(member) != NOT_FOUND){
-           // return false;
-       // }
+        if (find(member) != NOT_FOUND){
+           return false;
+        }
+        /*
         for (Member value : mlist) {
             if (member.equals(value)) {
                 return false;
             }
         }
+        */
+
         mlist[size] = (member);
         size++;
         return true;
