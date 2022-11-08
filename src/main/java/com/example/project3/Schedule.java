@@ -1,4 +1,9 @@
 package com.example.project3;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * Class that stores schedule information from
  * the text file given
@@ -77,5 +82,44 @@ public class Schedule {
      * empty or not
      * @return true or false
      */
+    public String[] readLines(String filename) {
+        try {
+            String [] output = new String[numLines("classSchedule.txt")];
+            File file = new File("classSchedule.txt");
+            Scanner sc = new Scanner(file);
+            String line = "";
+            int i = 0;
+            while (sc.hasNextLine()) {
+                line = sc.nextLine();
+                output[i++] = line;
+            }
+            sc.close();
+            return output;
+        }
+        catch(FileNotFoundException e) {
+            e.printStackTrace();
+            String[] error = new String[1];
+            error[0] = "File not found";
+            return error;
+        }
+    }
+    public int numLines(String filename){
+        try{
+            File file = new File("classSchedule.txt");
+            Scanner sc = new Scanner(file);
+            int i = 0;
 
+            while (sc.hasNextLine()) {
+                sc.nextLine();
+                i++;
+            }
+            sc.close();
+            return i;
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
 }

@@ -1,6 +1,9 @@
 package com.example.project3;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 /**
  * Array database to put members in.
@@ -111,7 +114,7 @@ public class MemberDatabase {
      */
     public String print() {
         if (size == 0) {
-            return ("Member Database is empty!");
+            return ("Member Database is empty!\n");
 
         }
         String str = "";
@@ -128,7 +131,7 @@ public class MemberDatabase {
      */
     public String printByCounty() {
         if (size == 0) {
-            return("Member Database is empty!");
+            return("Member Database is empty!\n");
 
         }
 
@@ -323,6 +326,46 @@ public class MemberDatabase {
             }
         }
     return null;
+    }
+    public String[] readLines(String filename) {
+        try {
+            String [] output = new String[numLines("memberList.txt")];
+            File file = new File("memberList.txt");
+            Scanner sc = new Scanner(file);
+            String line = "";
+            int i = 0;
+            while (sc.hasNextLine()) {
+                line = sc.nextLine();
+                output[i++] = line;
+            }
+            sc.close();
+            return output;
+        }
+        catch(FileNotFoundException e) {
+            e.printStackTrace();
+            String[] error = new String[1];
+            error[0] = "File not found";
+            return error;
+        }
+    }
+    public int numLines(String filename){
+        try{
+            File file = new File("memberList.txt");
+            Scanner sc = new Scanner(file);
+            int i = 0;
+
+            while (sc.hasNextLine()) {
+                sc.nextLine();
+                i++;
+            }
+            sc.close();
+            return i;
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+            return 0;
+        }
+
     }
 
 }

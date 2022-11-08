@@ -2,10 +2,8 @@ package com.example.project3;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+
 
 
 public class GymManagerController {
@@ -226,61 +224,50 @@ public class GymManagerController {
     @FXML
     protected void addFile(){
         if(scheduletxt.isSelected()){
-            try {
-                File file = new File("classSchedule.txt");
-                Scanner scanner = new Scanner(file);
-                String line = "";
-                outputTextArea.appendText("-Fitness classes loaded-\n");
-                while(scanner.hasNextLine()) {
-                    line = scanner.nextLine();
-                    String[] words = line.split(" ");
-                    int count = 0;
-                    FitnessClass fitness = new FitnessClass();
-                    String className = words[count++];
-                    Classes fclass = findClass(className);
-                    fitness.setClass(fclass);
-                    String instructorName = words[count++];
-                    Instructor instructor = findInstructor(instructorName);
-                    fitness.setInstructor(instructor);
-                    String timeStr = words[count++];
-                    Time time = findTime(timeStr);
-                    fitness.setTime(time);
-                    String locationName = words[count];
-                    Location location = findLocation(locationName);
-                    fitness.setLocation(location);
-                    schedule.addClass(fitness);
-                   outputTextArea.appendText(fitness.toString()+"\n");
-                }
-                outputTextArea.appendText("-end of class list-\n");
-                scanner.close();
-            }
-            catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            outputTextArea.appendText("-list of classes loaded-\n");
+            String [] stuff= schedule.readLines("classSchedule.txt");
+
+            for(int i = 0; i < stuff.length;i++){
+                int count = 0;
+                String [] lines = stuff[i].split(" ");
+                FitnessClass fitness = new FitnessClass();
+                String className = lines[count++];
+                Classes fclass = findClass(className);
+                fitness.setClass(fclass);
+
+                String instructorName = lines[count++];
+                Instructor instructor = findInstructor(instructorName);
+                fitness.setInstructor(instructor);
+                String timeStr = lines[count++];
+                Time time = findTime(timeStr);
+                fitness.setTime(time);
+                String locationName = lines[count];
+                Location location = findLocation(locationName);
+                fitness.setLocation(location);
+                schedule.addClass(fitness);
+                outputTextArea.appendText(fitness.toString()+"\n");
+             }
+
+            outputTextArea.appendText("-end of class list-\n");
         }
         else if(membertxt.isSelected()){
-            try {
-                File file = new File("memberList.txt");
-                Scanner sc = new Scanner(file);
-                String line = "";
-
-                outputTextArea.appendText("-list of members loaded-\n");
-
-                while(sc.hasNextLine()) {
-                    line = sc.nextLine();
-                    String[] stuff = line.split("\\s+");
-                    addFileMem(stuff);
+            outputTextArea.appendText("-list of members loaded-\n");
+            String [] stuff = memData.readLines("memberList.txt");
+            for(int i = 0; i < stuff.length;i++) {
+                String[] lines = stuff[i].split("\\s+");
+                if (stuff[i].equals("File Not Found")) {
+                    outputTextArea.appendText(stuff[i]);
+                    break;
                 }
+                outputTextArea.appendText(addFileMem(lines));
+            }
+            outputTextArea.appendText("-end of list-\n");
 
-                sc.close();
-                outputTextArea.appendText("-end of list-\n");
-            }
-            catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
         }
+
     }
-    private void addFileMem(String[] info) {
+
+    private String addFileMem(String[] info) {
         Member mem = new Member();
         int c = 0;
         mem.setFname(info[c++]);
@@ -297,11 +284,12 @@ public class GymManagerController {
         }
         if (validation(mem, location)) {
             if (!memData.add(mem)) {
-                outputTextArea.appendText(mem.getFname() + " " + mem.getLname() + " is already in the database.\n");
+                return(mem.getFname() + " " + mem.getLname() + " is already in the database.\n");
             } else {
-                outputTextArea.appendText(mem.toString()+"\n");
+                return(mem.toString()+"\n");
             }
         }
+        return"Error";
     }
     private Classes findClass(String className) {
         Classes fitness = null;
