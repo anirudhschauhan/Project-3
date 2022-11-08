@@ -1,13 +1,17 @@
 package com.example.project3;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-
+/**
+ * This class allows the user to store and load information
+ * about a member through the javafx GUI
+ * @author Anirudh Schauhan, Matthew Calora
+ */
 public class GymManagerController {
 
     private MemberDatabase memData;
@@ -48,6 +52,12 @@ public class GymManagerController {
     private TextArea outputTextArea;
 
 
+    /**
+     * This method adds a member to the database.
+     * Output to database depends on the member's
+     * membership type.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     public void addMember(){
         if(fname.getText().equals("") || lname.getText().equals("")){
             outputTextArea.appendText("Please enter your name.\n");
@@ -73,10 +83,20 @@ public class GymManagerController {
 
 
     }
+    /**
+     * This method removes a member from the database
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     @FXML
     protected void removeMember(){
         removeMem();
     }
+
+    /**
+     * This method adds a member with a Standard
+     * membership to the database.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private void addStandMem() {
         Member mem = new Member();
 
@@ -103,6 +123,12 @@ public class GymManagerController {
             }
         }
     }
+
+    /**
+     * This method adds a member with a Family
+     * membership to the database.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private void addFam() {
         Family fam = new Family();
 
@@ -129,6 +155,12 @@ public class GymManagerController {
             }
         }
     }
+
+    /**
+     * This method adds a member with a Premium
+     * membership to the database.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private void addPre() {
         Premium pre = new Premium();
 
@@ -155,6 +187,12 @@ public class GymManagerController {
             }
         }
     }
+
+    /**
+     * This method removes a member from the
+     * database.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private void removeMem() {
         Member mem = new Member();
 
@@ -197,6 +235,11 @@ public class GymManagerController {
 
         return true;
     }
+
+    /**
+     * This method prints the database
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     @FXML
     protected void printMem() {
         if (memData.getSize() == 0) {
@@ -207,22 +250,49 @@ public class GymManagerController {
         outputTextArea.appendText(memData.print());
         outputTextArea.appendText("-end of list-\n");
     }
+
+    /**
+     * This method prints the database by County
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     @FXML
     protected void printCounty(){
         outputTextArea.appendText(memData.printByCounty());
     }
+
+    /**
+     * This method prints the database by Name
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     @FXML
     protected void printName(){
         outputTextArea.appendText(memData.printByName());
     }
+
+    /**
+     * This method prints the database by Expiration Date
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     @FXML
     protected void printExp(){
         outputTextArea.appendText(memData.printByExpirationDate());
     }
+
+    /**
+     * This method prints the membership Fees
+     * of the members in the database
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     @FXML
     protected void printFees(){
         outputTextArea.appendText(memData.printMemFees());
     }
+
+    /**
+     * This method adds a pre-made classSchedule.txt file
+     * to the database and prints it out on the GUI
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     @FXML
     protected void addFile(){
         if(scheduletxt.isSelected()){
@@ -280,6 +350,11 @@ public class GymManagerController {
             }
         }
     }
+    /**
+     * This method adds a pre-made memberList.txt file
+     * to the database and prints it out on the GUI
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private void addFileMem(String[] info) {
         Member mem = new Member();
         int c = 0;
@@ -303,6 +378,11 @@ public class GymManagerController {
             }
         }
     }
+
+    /**
+     * This method finds a class and returns it
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private Classes findClass(String className) {
         Classes fitness = null;
         for(Classes classes : Classes.values()) {
@@ -312,6 +392,11 @@ public class GymManagerController {
         }
         return fitness;
     }
+
+    /**
+     * This method finds an instructor and returns it
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private Instructor findInstructor(String instructorName) {
         Instructor instructor = null;
         for(Instructor i : Instructor.values()) {
@@ -332,6 +417,11 @@ public class GymManagerController {
         return location;
     }
 
+    /**
+     * This method finds a time and returns it
+     * @author Anirudh Schauhan, Matthew Calora
+     */
+
     private Time findTime(String timeStr) {
         Time time = null;
         for(Time t : Time.values()) {
@@ -341,6 +431,12 @@ public class GymManagerController {
         }
         return time;
     }
+
+    /**
+     * This method adds an individual to a fitness class.
+     * Checks in a member or guest if selected.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     @FXML
     private void checkInPerson(){
         if(guestCheck.isSelected()){
@@ -351,6 +447,12 @@ public class GymManagerController {
         }
 
     }
+
+    /**
+     * This method drops a member or guest from
+     * their fitness class
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     @FXML
     private void dropPerson(){
         if(guestCheck.isSelected()){
@@ -361,6 +463,12 @@ public class GymManagerController {
         }
 
     }
+
+    /**
+     * This method adds a member to a specific fitness class
+     * depending on selection given
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private void checkInMem() {
         FitnessClass fitness = new FitnessClass();
         Member mem = new Member();
@@ -400,6 +508,12 @@ public class GymManagerController {
             }
         }
     }
+
+    /**
+     * This method adds a guest to a specific fitness class
+     * depending on selection given
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private void checkInGuest() {
         FitnessClass fitness = new FitnessClass();
         Member mem = new Member();
@@ -437,6 +551,12 @@ public class GymManagerController {
             }
         }
     }
+
+    /**
+     * This method drops a member from a specific
+     * fitness class depending on selection
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private void dropClass() {
         FitnessClass fitness = new FitnessClass();
         Member mem = new Member();
@@ -474,6 +594,12 @@ public class GymManagerController {
             }
         }
     }
+
+    /**
+     * This method drops a guest from a specific
+     * fitness class depending on selection
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private void dropClassGuest() {
         FitnessClass fitness = new FitnessClass();
         Member mem = new Member();
@@ -512,6 +638,13 @@ public class GymManagerController {
         }
 
     }
+
+    /**
+     * This method checks a guest's membership rank.
+     * Checks for membership rank restrictions, membership expiration,
+     * and time conflicts.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private boolean validGuestCheckIn(Member mem, String className, String instructorName,
                                       String locationName, FitnessClass fitness) {
         Date today = new Date();
@@ -533,6 +666,13 @@ public class GymManagerController {
         }
         return true;
     }
+
+    /**
+     * This method checks a member's membership rank.
+     * Checks for membership rank restrictions, membership expiration,
+     * and time conflicts.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
 
     private boolean validCheckIn(Member mem, String className, String instructorName,
                                  String locationName, FitnessClass fitness) {
@@ -562,6 +702,14 @@ public class GymManagerController {
         }
         return false;
     }
+
+    /**
+     * This method runs checks on member information given.
+     * Checks if DOB is a valid date, the member is in the database,
+     * the fitness class exists, the instructor exists, the location exists,
+     * and if the instructor exists at a given location.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private boolean validConditions(Member mem, String className, String instructorName,
                                     String locationName, FitnessClass fitness) {
 
@@ -604,6 +752,11 @@ public class GymManagerController {
 
         return true;
     }
+
+    /**
+     * This method checks if the location is a valid location
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private Location locationCheck(FitnessClass fclass) {
         for(int i = 0; i < schedule.getNumClasses(); i++) {
             FitnessClass fitness = schedule.getFitnessClass(i);
@@ -617,6 +770,12 @@ public class GymManagerController {
         }
         return null;
     }
+
+    /**
+     * This method checks if the member is registered in
+     * multiple classes with the same start time.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     private FitnessClass checkTimeConflict(Member m, FitnessClass fclass) {
         Time time = fclass.getTime();
         for(int i = 0; i < schedule.getNumClasses(); i++) {

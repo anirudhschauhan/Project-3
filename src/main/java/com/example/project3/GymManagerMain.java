@@ -4,9 +4,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
+/**
+ * This class launches the GUI for the GymManager program
+ * @author Anirudh Schauhan, Matthew Calora
+ */
 public class GymManagerMain extends Application {
     @Override
     public void start(Stage stage) throws IOException {
@@ -17,6 +20,11 @@ public class GymManagerMain extends Application {
         stage.show();
     }
 
+    /**
+     * This is the main method for the GUI.
+     * Launches the GUI.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     public static void main(String[] args) {
         launch();
     }
