@@ -52,7 +52,12 @@ public class GymManagerController {
     @FXML
     private TextArea outputTextArea;
 
-
+    /**
+     * This method adds a member to the database
+     * based on the information given through
+     * the GUI.
+     * @author Anirudh Schauhan, Matthew Calora
+     */
     public void addMember(){
         if(fname.getText().equals("") || lname.getText().equals("")){
             outputTextArea.appendText("Please enter your name.\n");
